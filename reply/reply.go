@@ -23,10 +23,10 @@ func Wrap(f func(c *gin.Context) gin.HandlerFunc) gin.HandlerFunc {
 
 func Success(code int, data map[string]interface{}) gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.JSON(http.StatusBadRequest, Response{
-			Code: code,
-			Data: data,
-		})
+		if _, exist := data["code"]; !exist {
+			data["code"] = code
+		}
+		context.JSON(http.StatusOK, data)
 	}
 }
 
