@@ -31,15 +31,15 @@ func Success(code int, data map[string]interface{}) gin.HandlerFunc {
 }
 
 func ErrorWithMessage(err error, msg string) gin.HandlerFunc {
-	return Err(msg, errors.WithMessage(err, msg))
+	return Err(msg, errors.WithMessage(err))
 }
 
-func Err(msg string, err error) gin.HandlerFunc {
+func Err(err error) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		fmt.Printf("%+v", err)
 		c.JSON(http.StatusBadRequest, Response{
 			Code: http.StatusBadRequest,
-			Msg:  msg,
+			Msg:  err.Error(),
 		})
 	}
 }
