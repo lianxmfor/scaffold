@@ -59,7 +59,7 @@ func Del(ctx context.Context, keys ...interface{}) error {
                 return err
         }
         defer conn.Close()
-        _, err := conn.Do("del", keys...)
+        _, err = conn.Do("del", keys...)
         if err != nil {
                 return errors.Wrap(err, "")
         }
@@ -98,7 +98,7 @@ func Get(ctx context.Context, key string) (interface{}, error) {
 
         reply, err := conn.Do("get", key)
         if err != nil {
-                return errors.Wrap(err, "redis error.")
+                return nil, errors.Wrap(err, "redis error.")
         }
         return reply, nil
 }
