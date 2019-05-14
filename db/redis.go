@@ -2,7 +2,6 @@ package db
 
 import (
         "context"
-        "fmt"
         "time"
 
         "github.com/gomodule/redigo/redis"
